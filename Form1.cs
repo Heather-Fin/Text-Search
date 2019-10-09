@@ -34,11 +34,23 @@ namespace hxf180007Asg4
             if (openFileDialog1.ShowDialog() == DialogResult.OK)
             {
                 string fileName = openFileDialog1.FileName;
-
-                InputFile file = new InputFile();
-                file.LoadFile(fileName);
-                ShowData(file);
+                txtBox_fileName.Text = fileName;
             }
+        }
+
+        private void TxtBox_search_TextChanged(object sender, EventArgs e)
+        {
+            // Enable the search button if there is something to search for
+            if (txtBox_search.TextLength > 0)
+            {
+                btn_search.Enabled = true;
+            }
+        }
+
+        // Search file for what is in search textbox
+        private void Btn_search_Click(object sender, EventArgs e)
+        {
+            string searchPhrase = txtBox_search.Text;
         }
     }
 }

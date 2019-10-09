@@ -75,6 +75,7 @@
             this.txtBox_search.Name = "txtBox_search";
             this.txtBox_search.Size = new System.Drawing.Size(627, 20);
             this.txtBox_search.TabIndex = 3;
+            this.txtBox_search.TextChanged += new System.EventHandler(this.TxtBox_search_TextChanged);
             // 
             // btn_browse
             // 
@@ -97,6 +98,7 @@
             this.btn_search.TabIndex = 5;
             this.btn_search.Text = "Search";
             this.btn_search.UseVisualStyleBackColor = true;
+            this.btn_search.Click += new System.EventHandler(this.Btn_search_Click);
             // 
             // listView1
             // 
