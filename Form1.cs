@@ -83,9 +83,10 @@ namespace hxf180007Asg4
             string line;
             int counter = 0;
             string searchPhrase = txtBox_search.Text;
-            StreamReader file = new StreamReader(txtBox_fileName.Text);
+            string fileName = txtBox_fileName.Text;
+            StreamReader file = new StreamReader(fileName);
 
-            toolStripStatusLabel1.Text = "Analyzing file: " + file + "for phrase: " + searchPhrase;
+            toolStripStatusLabel1.Text = "Analyzing file: " + fileName + " for phrase: " + searchPhrase;
 
             // Read the source file
             while ((line = file.ReadLine()) != null)
@@ -112,7 +113,7 @@ namespace hxf180007Asg4
                 if (backgroundWorker1.CancellationPending)
                 {
                     e.Cancel = true;
-                    toolStripStatusLabel1.Text = "Analysis of file: " + file + " canceled.";
+                    toolStripStatusLabel1.Text = "Analysis of file: " + fileName + " canceled.";
                     return;
                 }
             }
@@ -121,15 +122,15 @@ namespace hxf180007Asg4
 
         private void backgroundWorker1_RunWorkerCompleted(object sender, System.ComponentModel.RunWorkerCompletedEventArgs e)
         {
-            btn_search.Text = "Search";
-
+            // Search was canceled
             if (e.Cancelled)
             {
                 // search canceled
             }
+            // Error during search
             else if (e.Error != null)
             {
-                // error
+                toolStripStatusLabel1.Text = "There was an error: " + e.Error.Message;
             }
             // Search completed
             else
@@ -143,5 +144,6 @@ namespace hxf180007Asg4
         {
 
         }
+
     }
 }
