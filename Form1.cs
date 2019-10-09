@@ -21,8 +21,8 @@ namespace hxf180007Asg4
     {
         public Form1()
         {
-            toolStripStatusLabel1.Text = "Select a file and phrase to analyze.";
             InitializeComponent();
+            toolStripStatusLabel1.Text = "Select a file and phrase to analyze.";
         }
 
         private void Btn_browse_Click(object sender, EventArgs e)
@@ -83,9 +83,11 @@ namespace hxf180007Asg4
             string line;
             int counter = 0;
             string searchPhrase = txtBox_search.Text;
+            StreamReader file = new StreamReader(txtBox_fileName.Text);
+
+            toolStripStatusLabel1.Text = "Analyzing file: " + file + "for phrase: " + searchPhrase;
 
             // Read the source file
-            StreamReader file = new StreamReader(txtBox_fileName.Text);
             while ((line = file.ReadLine()) != null)
             {
                 counter++;
@@ -110,6 +112,7 @@ namespace hxf180007Asg4
                 if (backgroundWorker1.CancellationPending)
                 {
                     e.Cancel = true;
+                    toolStripStatusLabel1.Text = "Analysis of file: " + file + " canceled.";
                     return;
                 }
             }
@@ -131,6 +134,7 @@ namespace hxf180007Asg4
             // Search completed
             else
             {
+                toolStripStatusLabel1.Text = "Analysis of file completed.";
                 btn_search.Text = "Search";
             }
         }
