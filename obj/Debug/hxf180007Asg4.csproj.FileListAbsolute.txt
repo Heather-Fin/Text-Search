@@ -8,3 +8,13 @@ C:\Users\Heather\Desktop\CS 6326\CS6326_Assignment4\hxf180007Asg4\hxf180007Asg4\
 C:\Users\Heather\Desktop\CS 6326\CS6326_Assignment4\hxf180007Asg4\hxf180007Asg4\obj\Debug\hxf180007Asg4.csproj.CoreCompileInputs.cache
 C:\Users\Heather\Desktop\CS 6326\CS6326_Assignment4\hxf180007Asg4\hxf180007Asg4\obj\Debug\hxf180007Asg4.exe
 C:\Users\Heather\Desktop\CS 6326\CS6326_Assignment4\hxf180007Asg4\hxf180007Asg4\obj\Debug\hxf180007Asg4.pdb
+C:\Users\Heather\Desktop\CS6326\CS6326_Assignment4\hxf180007Asg4\hxf180007Asg4\bin\Debug\hxf180007Asg4.exe.config
+C:\Users\Heather\Desktop\CS6326\CS6326_Assignment4\hxf180007Asg4\hxf180007Asg4\bin\Debug\hxf180007Asg4.exe
+C:\Users\Heather\Desktop\CS6326\CS6326_Assignment4\hxf180007Asg4\hxf180007Asg4\bin\Debug\hxf180007Asg4.pdb
+C:\Users\Heather\Desktop\CS6326\CS6326_Assignment4\hxf180007Asg4\hxf180007Asg4\obj\Debug\hxf180007Asg4.csprojAssemblyReference.cache
+C:\Users\Heather\Desktop\CS6326\CS6326_Assignment4\hxf180007Asg4\hxf180007Asg4\obj\Debug\hxf180007Asg4.Form1.resources
+C:\Users\Heather\Desktop\CS6326\CS6326_Assignment4\hxf180007Asg4\hxf180007Asg4\obj\Debug\hxf180007Asg4.Properties.Resources.resources
+C:\Users\Heather\Desktop\CS6326\CS6326_Assignment4\hxf180007Asg4\hxf180007Asg4\obj\Debug\hxf180007Asg4.csproj.GenerateResource.cache
+C:\Users\Heather\Desktop\CS6326\CS6326_Assignment4\hxf180007Asg4\hxf180007Asg4\obj\Debug\hxf180007Asg4.csproj.CoreCompileInputs.cache
+C:\Users\Heather\Desktop\CS6326\CS6326_Assignment4\hxf180007Asg4\hxf180007Asg4\obj\Debug\hxf180007Asg4.exe
+C:\Users\Heather\Desktop\CS6326\CS6326_Assignment4\hxf180007Asg4\hxf180007Asg4\obj\Debug\hxf180007Asg4.pdb

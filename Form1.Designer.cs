@@ -38,6 +38,10 @@
             this.LineNumber = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.LineText = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.openFileDialog1 = new System.Windows.Forms.OpenFileDialog();
+            this.backgroundWorker1 = new System.ComponentModel.BackgroundWorker();
+            this.statusStrip1 = new System.Windows.Forms.StatusStrip();
+            this.toolStripStatusLabel1 = new System.Windows.Forms.ToolStripStatusLabel();
+            this.statusStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
             // label1
@@ -63,7 +67,7 @@
             // txtBox_fileName
             // 
             this.txtBox_fileName.Location = new System.Drawing.Point(90, 17);
-            this.txtBox_fileName.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.txtBox_fileName.Margin = new System.Windows.Forms.Padding(2);
             this.txtBox_fileName.Name = "txtBox_fileName";
             this.txtBox_fileName.Size = new System.Drawing.Size(627, 20);
             this.txtBox_fileName.TabIndex = 2;
@@ -71,7 +75,7 @@
             // txtBox_search
             // 
             this.txtBox_search.Location = new System.Drawing.Point(90, 48);
-            this.txtBox_search.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.txtBox_search.Margin = new System.Windows.Forms.Padding(2);
             this.txtBox_search.Name = "txtBox_search";
             this.txtBox_search.Size = new System.Drawing.Size(627, 20);
             this.txtBox_search.TabIndex = 3;
@@ -80,7 +84,7 @@
             // btn_browse
             // 
             this.btn_browse.Location = new System.Drawing.Point(731, 17);
-            this.btn_browse.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.btn_browse.Margin = new System.Windows.Forms.Padding(2);
             this.btn_browse.Name = "btn_browse";
             this.btn_browse.Size = new System.Drawing.Size(74, 20);
             this.btn_browse.TabIndex = 4;
@@ -120,17 +124,40 @@
             // LineText
             // 
             this.LineText.Text = "Text";
+            this.LineText.Width = 711;
             // 
             // openFileDialog1
             // 
             this.openFileDialog1.FileName = "openFileDialog1";
             // 
+            // backgroundWorker1
+            // 
+            this.backgroundWorker1.WorkerSupportsCancellation = true;
+            this.backgroundWorker1.DoWork += new System.ComponentModel.DoWorkEventHandler(this.BackgroundWorker1_DoWork);
+            // 
+            // statusStrip1
+            // 
+            this.statusStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.toolStripStatusLabel1});
+            this.statusStrip1.Location = new System.Drawing.Point(0, 454);
+            this.statusStrip1.Name = "statusStrip1";
+            this.statusStrip1.Size = new System.Drawing.Size(876, 22);
+            this.statusStrip1.TabIndex = 7;
+            this.statusStrip1.Text = "statusStrip1";
+            // 
+            // toolStripStatusLabel1
+            // 
+            this.toolStripStatusLabel1.Name = "toolStripStatusLabel1";
+            this.toolStripStatusLabel1.Size = new System.Drawing.Size(118, 17);
+            this.toolStripStatusLabel1.Text = "toolStripStatusLabel1";
+            // 
             // Form1
             // 
-            this.AcceptButton = this.btn_browse;
+            this.AcceptButton = this.btn_search;
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(876, 476);
+            this.Controls.Add(this.statusStrip1);
             this.Controls.Add(this.listView1);
             this.Controls.Add(this.btn_search);
             this.Controls.Add(this.btn_browse);
@@ -138,10 +165,13 @@
             this.Controls.Add(this.txtBox_fileName);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.label1);
-            this.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.Margin = new System.Windows.Forms.Padding(2);
             this.Name = "Form1";
             this.Text = "Text Search";
             this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
+            this.Load += new System.EventHandler(this.Form1_Load);
+            this.statusStrip1.ResumeLayout(false);
+            this.statusStrip1.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -159,6 +189,9 @@
         private System.Windows.Forms.ColumnHeader LineNumber;
         private System.Windows.Forms.ColumnHeader LineText;
         private System.Windows.Forms.OpenFileDialog openFileDialog1;
+        private System.ComponentModel.BackgroundWorker backgroundWorker1;
+        private System.Windows.Forms.StatusStrip statusStrip1;
+        private System.Windows.Forms.ToolStripStatusLabel toolStripStatusLabel1;
     }
 }
 

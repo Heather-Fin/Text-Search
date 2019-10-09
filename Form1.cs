@@ -7,6 +7,13 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.IO;
+using System.Text.RegularExpressions;
+
+// Multi-threaded Text Search (Assignment 4)
+// Author: Heather Finnegan
+// Course: CS6326 - Human Computer Interaction
+// Date Created: 10/09/2019
 
 namespace hxf180007Asg4
 {
@@ -14,6 +21,7 @@ namespace hxf180007Asg4
     {
         public Form1()
         {
+            toolStripStatusLabel1.Text = "Select a file and phrase to analyze.";
             InitializeComponent();
         }
 
@@ -45,12 +53,91 @@ namespace hxf180007Asg4
             {
                 btn_search.Enabled = true;
             }
+            else
+            {
+                btn_search.Enabled = false;
+            }
         }
 
         // Search file for what is in search textbox
         private void Btn_search_Click(object sender, EventArgs e)
         {
+            // If user clicks on search button, begin search
+            if (!backgroundWorker1.IsBusy && btn_search.Text == "Search")
+            {
+                listView1.Items.Clear();
+                backgroundWorker1.RunWorkerAsync();
+                btn_search.Text = "Cancel";
+            }
+
+            // If user clicks on cancel button, cancel search
+            else if (backgroundWorker1.IsBusy && btn_search.Text == "Cancel")
+            {
+                backgroundWorker1.CancelAsync();
+                btn_search.Text = "Search";
+            }
+        }
+
+        private void BackgroundWorker1_DoWork(object sender, DoWorkEventArgs e)
+        {
+            string line;
+            int counter = 0;
             string searchPhrase = txtBox_search.Text;
+
+            // Read the source file
+            StreamReader file = new StreamReader(txtBox_fileName.Text);
+            while ((line = file.ReadLine()) != null)
+            {
+                counter++;
+
+                // Check for matches here, ignoring casing
+                bool match = Regex.IsMatch(line, searchPhrase, RegexOptions.IgnoreCase);
+                if (match)
+                {
+                    // Add item to list view
+                    if (listView1.InvokeRequired)
+                    {
+                        listView1.Invoke((MethodInvoker)delegate ()
+                        {
+                            ListViewItem item = new ListViewItem(counter.ToString());
+                            item.SubItems.Add(line.Trim());
+                            listView1.Items.Add(item);
+                        });
+                    }
+                }
+
+                // Check if user cancels search
+                if (backgroundWorker1.CancellationPending)
+                {
+                    e.Cancel = true;
+                    return;
+                }
+            }
+            file.Close();
+        }
+
+        private void backgroundWorker1_RunWorkerCompleted(object sender, System.ComponentModel.RunWorkerCompletedEventArgs e)
+        {
+            btn_search.Text = "Search";
+
+            if (e.Cancelled)
+            {
+                // search canceled
+            }
+            else if (e.Error != null)
+            {
+                // error
+            }
+            // Search completed
+            else
+            {
+                btn_search.Text = "Search";
+            }
+        }
+
+        private void Form1_Load(object sender, EventArgs e)
+        {
+
         }
     }
 }
