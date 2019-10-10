@@ -137,9 +137,6 @@ namespace hxf180007Asg4
             searchPhrase = txtBox_search.Text;
             fileName = txtBox_fileName.Text;
 
-            // Set pause for 1 milisecond
-            Thread.Sleep(1);
-
             var file = CheckFileExists(fileName);
             if(file is null)
             {
@@ -153,6 +150,9 @@ namespace hxf180007Asg4
             while ((line = file.ReadLine()) != null)
             {
                 counter++;
+
+                // Set pause for 1 milisecond
+                Thread.Sleep(1);
 
                 // Check for matches here, ignoring casing
                 bool match = Regex.IsMatch(line, searchPhrase, RegexOptions.IgnoreCase);
