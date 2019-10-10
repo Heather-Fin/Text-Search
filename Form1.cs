@@ -10,6 +10,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.IO;
 using System.Text.RegularExpressions;
+using System.Media;
 
 // Multi-threaded Text Search (Assignment 4)
 // Author: Heather Finnegan
@@ -26,6 +27,12 @@ namespace hxf180007Asg4
         {
             InitializeComponent();
             toolStripStatusLabel1.Text = "Select a file and phrase to analyze.";
+        }
+
+        // Plays a sound if the user clicks cancel to quit searching
+        private void playSimpleSound()
+        {
+            SystemSounds.Asterisk.Play();
         }
 
         private void Btn_browse_Click(object sender, EventArgs e)
@@ -93,6 +100,8 @@ namespace hxf180007Asg4
             // If user clicks on cancel button, cancel search
             else if (backgroundWorker1.IsBusy && btn_search.Text == "Cancel")
             {
+                playSimpleSound();
+                lbl_results.Text += " Search was canceled prematurely.";
                 toolStripStatusLabel1.Text = "Analysis of file: " + fileName + " canceled.";
                 backgroundWorker1.CancelAsync();
                 btn_search.Text = "Search";
@@ -166,6 +175,8 @@ namespace hxf180007Asg4
                             ListViewItem item = new ListViewItem(counter.ToString());
                             item.SubItems.Add(line.Trim());
                             listView1.Items.Add(item);
+                            // Have listview follow most recently added item by scrolling down
+                            listView1.TopItem = listView1.Items[listView1.Items.Count - 1];
                         });
                     }
                     // Update results count
