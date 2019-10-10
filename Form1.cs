@@ -19,6 +19,8 @@ namespace hxf180007Asg4
 {
     public partial class Form1 : Form
     {
+        string fileName;
+        string searchPhrase;
         public Form1()
         {
             InitializeComponent();
@@ -46,10 +48,23 @@ namespace hxf180007Asg4
             }
         }
 
+        private void TxtBox_fileName_TextChanged(object sender, EventArgs e)
+        {
+            // Enable the search button if there is something to search for and a file to search
+            if (txtBox_search.TextLength > 0 && txtBox_fileName.TextLength > 0)
+            {
+                btn_search.Enabled = true;
+            }
+            else
+            {
+                btn_search.Enabled = false;
+            }
+        }
+
         private void TxtBox_search_TextChanged(object sender, EventArgs e)
         {
-            // Enable the search button if there is something to search for
-            if (txtBox_search.TextLength > 0)
+            // Enable the search button if there is something to search for and a file to search
+            if (txtBox_search.TextLength > 0 && txtBox_fileName.TextLength > 0)
             {
                 btn_search.Enabled = true;
             }
@@ -65,6 +80,10 @@ namespace hxf180007Asg4
             // If user clicks on search button, begin search
             if (!backgroundWorker1.IsBusy && btn_search.Text == "Search")
             {
+                if (string.IsNullOrWhiteSpace(txtBox_fileName.Text)) { 
+                    MessageBox.Show("Please choose a text file first.");
+                };
+                toolStripStatusLabel1.Text = "Analyzing file: " + fileName + " for phrase: " + searchPhrase;
                 listView1.Items.Clear();
                 backgroundWorker1.RunWorkerAsync();
                 btn_search.Text = "Cancel";
@@ -73,20 +92,59 @@ namespace hxf180007Asg4
             // If user clicks on cancel button, cancel search
             else if (backgroundWorker1.IsBusy && btn_search.Text == "Cancel")
             {
+                toolStripStatusLabel1.Text = "Analysis of file: " + fileName + " canceled.";
                 backgroundWorker1.CancelAsync();
                 btn_search.Text = "Search";
             }
         }
 
+        // Ensures the file path exists before attempting to read
+        private StreamReader CheckFileExists(string fileName)
+        {
+
+            try
+            {
+                using (StreamReader file = File.OpenText(fileName))
+                {
+                    return (new StreamReader(fileName));
+                }
+            }
+            catch (FileNotFoundException e)
+            {
+                Console.WriteLine($"The file was not found: '{e}'");
+                return null;
+            }
+            catch (DirectoryNotFoundException e)
+            {
+                Console.WriteLine($"The directory was not found: '{e}'");
+                return null;
+            }
+            catch (IOException e)
+            {
+                Console.WriteLine($"The file could not be opened: '{e}'");
+                return null;
+            }
+        }
+
         private void BackgroundWorker1_DoWork(object sender, DoWorkEventArgs e)
         {
+            backgroundWorker1.ReportProgress(0);
             string line;
             int counter = 0;
-            string searchPhrase = txtBox_search.Text;
-            string fileName = txtBox_fileName.Text;
-            StreamReader file = new StreamReader(fileName);
+            float currentSpot = 0;
+            searchPhrase = txtBox_search.Text;
+            fileName = txtBox_fileName.Text;
 
-            toolStripStatusLabel1.Text = "Analyzing file: " + fileName + " for phrase: " + searchPhrase;
+            var file = CheckFileExists(fileName);
+            if(file is null)
+            {
+                MessageBox.Show("Please enter a valid file path.");
+                return;
+            }
+
+            //StreamReader file = new StreamReader(fileName);
+
+            float fileSize = (new FileInfo(fileName)).Length;
 
             // Read the source file
             while ((line = file.ReadLine()) != null)
@@ -109,23 +167,36 @@ namespace hxf180007Asg4
                     }
                 }
 
+                // Set progress bar value by multiplying by size of each line and 
+                // dividing by total file size.
+                currentSpot += line.Length;
+                backgroundWorker1.ReportProgress((int)((currentSpot / fileSize) * 100));
+
                 // Check if user cancels search
                 if (backgroundWorker1.CancellationPending)
                 {
+                    backgroundWorker1.ReportProgress(0);
                     e.Cancel = true;
-                    toolStripStatusLabel1.Text = "Analysis of file: " + fileName + " canceled.";
                     return;
                 }
             }
+
+            backgroundWorker1.ReportProgress(100);
             file.Close();
         }
+
+        private void backgroundWorker1_ProgressChanged(object sender, System.ComponentModel.ProgressChangedEventArgs e)
+        {
+            this.progressBar1.Value = e.ProgressPercentage;
+        }
+
 
         private void backgroundWorker1_RunWorkerCompleted(object sender, System.ComponentModel.RunWorkerCompletedEventArgs e)
         {
             // Search was canceled
             if (e.Cancelled)
             {
-                // search canceled
+        
             }
             // Error during search
             else if (e.Error != null)
@@ -144,6 +215,5 @@ namespace hxf180007Asg4
         {
 
         }
-
     }
 }
