@@ -88,9 +88,8 @@ namespace hxf180007Asg4
             // If user clicks on search button, begin search
             if (!backgroundWorker1.IsBusy && btn_search.Text == "Search")
             {
-                if (string.IsNullOrWhiteSpace(txtBox_fileName.Text)) { 
-                    MessageBox.Show("Please choose a text file first.");
-                };
+                searchPhrase = txtBox_search.Text;
+                fileName = txtBox_fileName.Text;
                 toolStripStatusLabel1.Text = "Analyzing file: " + fileName + " for phrase: " + searchPhrase;
                 listView1.Items.Clear();
                 backgroundWorker1.RunWorkerAsync();
@@ -143,8 +142,6 @@ namespace hxf180007Asg4
             int counter = 0;
             float currentSpot = 0;
             int results = 0;
-            searchPhrase = txtBox_search.Text;
-            fileName = txtBox_fileName.Text;
 
             var file = CheckFileExists(fileName);
             if(file is null)
@@ -185,7 +182,14 @@ namespace hxf180007Asg4
                         lbl_results.Invoke((MethodInvoker)delegate ()
                         {
                             results++;
-                            lbl_results.Text = results + " matches found.";
+                            if (results == 1)
+                            {
+                                lbl_results.Text = results + " match found.";
+                            }
+                            else
+                            {
+                                lbl_results.Text = results + " matches found.";
+                            }
                         });
                     }
                 }
