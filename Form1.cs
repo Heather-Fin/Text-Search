@@ -25,6 +25,8 @@ namespace hxf180007Asg4
         {
             InitializeComponent();
             toolStripStatusLabel1.Text = "Select a file and phrase to analyze.";
+            listView1.Width = Convert.ToInt32(this.Width * 0.9);
+            listView1.Height = Convert.ToInt32(this.Height * 0.9);
         }
 
         private void Btn_browse_Click(object sender, EventArgs e)
@@ -132,6 +134,7 @@ namespace hxf180007Asg4
             string line;
             int counter = 0;
             float currentSpot = 0;
+            int results = 0;
             searchPhrase = txtBox_search.Text;
             fileName = txtBox_fileName.Text;
 
@@ -141,8 +144,6 @@ namespace hxf180007Asg4
                 MessageBox.Show("Please enter a valid file path.");
                 return;
             }
-
-            //StreamReader file = new StreamReader(fileName);
 
             float fileSize = (new FileInfo(fileName)).Length;
 
@@ -163,6 +164,15 @@ namespace hxf180007Asg4
                             ListViewItem item = new ListViewItem(counter.ToString());
                             item.SubItems.Add(line.Trim());
                             listView1.Items.Add(item);
+                        });
+                    }
+                    // Update results count
+                    if (lbl_results.InvokeRequired)
+                    {
+                        lbl_results.Invoke((MethodInvoker)delegate ()
+                        {
+                            results++;
+                            lbl_results.Text = results + " matches found.";
                         });
                     }
                 }
