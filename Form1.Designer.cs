@@ -112,13 +112,18 @@ namespace hxf180007Asg4
             // 
             // listView1
             // 
+            this.listView1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.listView1.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
             this.LineNumber,
             this.LineText});
+            this.listView1.FullRowSelect = true;
+            this.listView1.HeaderStyle = System.Windows.Forms.ColumnHeaderStyle.Nonclickable;
             this.listView1.HideSelection = false;
             this.listView1.Location = new System.Drawing.Point(28, 96);
             this.listView1.Name = "listView1";
-            this.listView1.Size = new System.Drawing.Size(777, 328);
+            this.listView1.Size = new System.Drawing.Size(777, 280);
             this.listView1.TabIndex = 6;
             this.listView1.UseCompatibleStateImageBehavior = false;
             this.listView1.View = System.Windows.Forms.View.Details;
@@ -130,7 +135,7 @@ namespace hxf180007Asg4
             // LineText
             // 
             this.LineText.Text = "Text";
-            this.LineText.Width = 711;
+            this.LineText.Width = 65;
             // 
             // openFileDialog1
             // 
@@ -149,7 +154,7 @@ namespace hxf180007Asg4
             this.statusStrip1.ImageScalingSize = new System.Drawing.Size(24, 24);
             this.statusStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.toolStripStatusLabel1});
-            this.statusStrip1.Location = new System.Drawing.Point(0, 510);
+            this.statusStrip1.Location = new System.Drawing.Point(0, 446);
             this.statusStrip1.Name = "statusStrip1";
             this.statusStrip1.Size = new System.Drawing.Size(844, 22);
             this.statusStrip1.TabIndex = 7;
@@ -163,15 +168,18 @@ namespace hxf180007Asg4
             // 
             // progressBar1
             // 
-            this.progressBar1.Location = new System.Drawing.Point(28, 428);
+            this.progressBar1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.progressBar1.Location = new System.Drawing.Point(28, 382);
             this.progressBar1.Name = "progressBar1";
             this.progressBar1.Size = new System.Drawing.Size(777, 23);
             this.progressBar1.TabIndex = 8;
             // 
             // label3
             // 
+            this.label3.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(25, 464);
+            this.label3.Location = new System.Drawing.Point(25, 417);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(45, 13);
             this.label3.TabIndex = 9;
@@ -179,8 +187,9 @@ namespace hxf180007Asg4
             // 
             // lbl_results
             // 
+            this.lbl_results.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.lbl_results.AutoSize = true;
-            this.lbl_results.Location = new System.Drawing.Point(76, 464);
+            this.lbl_results.Location = new System.Drawing.Point(76, 417);
             this.lbl_results.Name = "lbl_results";
             this.lbl_results.Size = new System.Drawing.Size(0, 13);
             this.lbl_results.TabIndex = 10;
@@ -190,7 +199,7 @@ namespace hxf180007Asg4
             this.AcceptButton = this.btn_search;
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(844, 532);
+            this.ClientSize = new System.Drawing.Size(844, 468);
             this.Controls.Add(this.lbl_results);
             this.Controls.Add(this.label3);
             this.Controls.Add(this.progressBar1);

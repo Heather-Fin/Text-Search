@@ -5,6 +5,7 @@ using System.Data;
 using System.Drawing;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.IO;
@@ -25,8 +26,6 @@ namespace hxf180007Asg4
         {
             InitializeComponent();
             toolStripStatusLabel1.Text = "Select a file and phrase to analyze.";
-            listView1.Width = Convert.ToInt32(this.Width * 0.9);
-            listView1.Height = Convert.ToInt32(this.Height * 0.9);
         }
 
         private void Btn_browse_Click(object sender, EventArgs e)
@@ -138,6 +137,9 @@ namespace hxf180007Asg4
             searchPhrase = txtBox_search.Text;
             fileName = txtBox_fileName.Text;
 
+            // Set pause for 1 milisecond
+            Thread.Sleep(1);
+
             var file = CheckFileExists(fileName);
             if(file is null)
             {
@@ -225,5 +227,6 @@ namespace hxf180007Asg4
         {
 
         }
+
     }
 }
